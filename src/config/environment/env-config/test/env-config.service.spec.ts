@@ -27,7 +27,6 @@ describe('EnvConfigService', () => {
 
     it('should return a port', () => {
       const port = sut.getPort();
-      console.log(port);
       expect(port).toBeDefined();
       expect(port).toBe('4000');
     });
