@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { SwaggerTheme } from 'swagger-themes';
+import { EnvConfigService } from './config/environment/env-config/env-config.service';
+import { IEnvironmentVariables } from './config/environment/environment.interface';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -37,8 +39,9 @@ async function bootstrap() {
     },
     customCss: theme.getBuffer('dark'),
   });
-  //#TODO: add get env class
-  await app.listen(3000);
+  const envConfigService = app.get<EnvConfigService>('IEnvironmentVariables');
+  const port = envConfigService.getPort() || 8000;
+  await app.listen(port);
 }
 
 bootstrap();
