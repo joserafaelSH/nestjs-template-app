@@ -1,18 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EnvConfigService } from '../env-config.service';
+import { EnvConfigModule } from '../env-config.module';
 
-describe.skip('EnvConfigService', () => {
-  let service: EnvConfigService;
+describe('EnvConfigService', () => {
+  let sut: EnvConfigService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [EnvConfigModule.forRoot()],
       providers: [EnvConfigService],
     }).compile();
 
-    service = module.get<EnvConfigService>(EnvConfigService);
+    sut = module.get<EnvConfigService>(EnvConfigService);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(sut).toBeDefined();
+  });
+
+  describe('get environment vars ', () => {
+    it('should return a node env', () => {
+      const nodeEnv = sut.getNodeEnv();
+      expect(nodeEnv).toBeDefined();
+      expect(nodeEnv).toEqual('test');
+    });
+
+    it('should return a port', () => {
+      const port = sut.getPort();
+      console.log(port);
+      expect(port).toBeDefined();
+      expect(port).toBe('4000');
+    });
   });
 });

@@ -1,4 +1,4 @@
 export interface IEnvironmentVariables {
   getNodeEnv(): string;
-  getPort(): number;
+  getPort(): string;
 }

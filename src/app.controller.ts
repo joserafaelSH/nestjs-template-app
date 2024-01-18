@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
+import { IEnvironmentVariables } from './config/environment/environment.interface';
 
 type Message = {
   message: string;
@@ -6,10 +7,12 @@ type Message = {
 
 @Controller()
 export class AppController {
-  constructor() {}
-
+  constructor(
+    @Inject('IEnvironmentVariables')
+    private readonly envConfigService: IEnvironmentVariables,
+  ) {}
   @Get()
   getHello(): Message {
-    return { message: `${process.env}` };
+    return { message: 'Hello World!' };
   }
 }

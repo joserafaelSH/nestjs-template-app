@@ -8,7 +8,7 @@ export class EnvConfigService implements IEnvironmentVariables {
   getNodeEnv(): string {
     return this.configService.get<string>('NODE_ENV');
   }
-  getPort(): number {
-    throw new Error('Method not implemented.');
+  getPort(): string {
+    return this.configService.get<string>('PORT');
   }
 }

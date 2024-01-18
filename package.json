@@ -1,5 +1,5 @@
 {
-  "name": "plin_api_inadimplencia",
+  "name": "api",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -9,15 +9,18 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "nest start --watch",
+    "start:dev": "npx dotenv-cli -e .env.dev -- nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
+    "test": "npx dotenv-cli -e .env.test -- jest --runInBand",
+    "test:unit": "npx dotenv-cli -e .env.test -- jest --runInBand --config ./jest.unit.config.ts",
+    "test:int": "npx dotenv-cli -e .env.test -- jest --runInBand --config ./jest.int.config.ts",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test:cov": "npx dotenv-cli -e .env.test -- jest --runInBand --coverage",
+    "test:cov-short": "npx dotenv-cli -e .env.test -- jest --runInBand --coverage  --coverageReporters=\"text-summary\" ",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "npx dotenv-cli -e .env.test -- jest --runInBand --config ./jest.e2e.config.ts",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -30,12 +33,14 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "commitizen": "^4.3.0",
+    "dotenv-cli": "^7.3.0",
     "husky": "^8.0.3",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "swagger-themes": "^1.2.30"
   },
   "devDependencies": {
-    "@nestjs/cli": "^10.0.0",
+    "@nestjs/cli": "^10.3.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
     "@swc/cli": "^0.1.63",

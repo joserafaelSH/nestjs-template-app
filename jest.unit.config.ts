@@ -6,7 +6,7 @@ export default {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/',
   }),
-  testRegex: '.*\\..*spec\\.ts$',
+  testRegex: '.*\\.spec\\.ts$',
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
